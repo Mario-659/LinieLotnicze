@@ -3,6 +3,7 @@ package org.example;
 import org.example.model.*;
 
 import java.util.Date;
+import java.util.Iterator;
 import java.util.List;
 
 public class Aplikacja {
@@ -121,6 +122,15 @@ public class Aplikacja {
             System.out.println(miejsce);
         }
     }
+
+    public void wyswietlLoty() {
+        Iterator<Lot> iterator = loty.iterator();
+        while (iterator.hasNext()) {
+            Lot lot = iterator.next();
+            System.out.println(lot.toString());
+        }
+    }
+
 
     private Klient pobierzDaneKlienta(String adresPocztyElektronicznej) {
         for (var klient : klienci) {
