@@ -180,8 +180,16 @@ public class Aplikacja {
         this.loty = loty;
     }
 
-    public void dodajPromocje(Promocja promocja) {
+    public boolean dodajPromocje(Promocja promocja) {
+        Iterator<Promocja> iterator = promocje.iterator();
+        while(iterator.hasNext()) {
+            Promocja istniejacaPromocja = iterator.next();
+            if (istniejacaPromocja.getNumerPromocji() == promocja.getNumerPromocji()) {
+                return false;
+            }
+        }
         promocje.add(promocja);
+        return true;
     }
 
     public void usunPromocje(Promocja promocja) {
