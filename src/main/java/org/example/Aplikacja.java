@@ -49,45 +49,6 @@ public class Aplikacja {
         return true;
     }
 
-    public boolean stworzRezerwacje(int numerLotu) {
-        Lot lot = wyszukajLot(numerLotu);
-        wyswietlMiejsca(lot);
-        Miejsce miejsceDoZarezerwowania = null;
-        if (getCzyMiejsceLosowe()) {
-            miejsceDoZarezerwowania = wybierzPierwszeWolneMiejsce(lot);
-            if (miejsceDoZarezerwowania == null) {
-                System.out.println("Brak wolnych miejsc");
-                return false;
-            }
-            miejsceDoZarezerwowania.setCzyMiejsceJestZajete(true);
-            System.out.println("Zarezerwowano miejsce o numerze " + miejsceDoZarezerwowania.getNumerMiejsca());
-        }
-        else {
-            int numerMiejsca = pobierzNumerMiejsca();
-            Miejsce miejsce = wyszukajMiejsce(numerMiejsca, lot);
-            if(miejsce == null || !miejsce.czyMiejsceJestZajete()) {
-                miejsce.setCzyMiejsceJestZajete(true);
-                System.out.println("Zarezerwowano miejsce o numerze " + miejsce.getNumerMiejsca());
-                miejsceDoZarezerwowania = miejsce;
-            }
-            else {
-                System.out.println("Miejsce jest zajete");
-                return false;
-            }
-        }
-        Klient daneZalogowanegoKlienta = pobierzDaneKlienta(getZalogowanyUzytkownik());
-        DanePlatnosci danePlatnosci = getDanePlatnosci();
-        if (zweryfikujDanePlatnosci(danePlatnosci) == false) {
-            System.out.println("Niepoprawne dane płatnosci");
-            miejsceDoZarezerwowania.setCzyMiejsceJestZajete(false);
-            return false;
-        }
-        else {
-            Rezerwacja nowaRezerwacja = new Rezerwacja(new Date(), lot, miejsceDoZarezerwowania.getNumerMiejsca(), daneZalogowanegoKlienta);
-            rezerwacje.add(nowaRezerwacja);
-            return true;
-        }
-    }
 
     private Miejsce wyszukajMiejsce(int numerMiejsca, Lot lot) {
         for (var miejsce : lot.getMiejsca()) {
@@ -141,22 +102,6 @@ public class Aplikacja {
         return null;
     }
 
-    public List<Klient> getKlienci() {
-        return klienci;
-    }
-
-    public void setKlienci(List<Klient> klienci) {
-        this.klienci = klienci;
-    }
-
-    public List<Rezerwacja> getRezerwacje() {
-        return rezerwacje;
-    }
-
-    public void setRezerwacje(List<Rezerwacja> rezerwacje) {
-        this.rezerwacje = rezerwacje;
-    }
-
     public void dodajLot(Lot lot) {
         loty.add(lot);
     }
@@ -170,14 +115,6 @@ public class Aplikacja {
             if (lot.getNumerLotu() == numerLotu) return lot;
         }
         return null;
-    }
-
-    public List<Lot> getLoty() {
-        return loty;
-    }
-
-    public void setLoty(List<Lot> loty) {
-        this.loty = loty;
     }
 
     public boolean dodajPromocje(Promocja promocja) {
@@ -201,13 +138,5 @@ public class Aplikacja {
             if (promocja.getNumerPromocji() == numerPromocji) return promocja;
         }
         return null;
-    }
-
-    public List<Promocja> getPromocje() {
-        return promocje;
-    }
-
-    public void setPromocje(List<Promocja> promocje) {
-        this.promocje = promocje;
     }
 }
