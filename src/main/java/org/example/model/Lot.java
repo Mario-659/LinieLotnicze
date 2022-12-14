@@ -2,6 +2,7 @@ package org.example.model;
 
 import java.math.BigDecimal;
 import java.util.Date;
+import java.util.Iterator;
 import java.util.List;
 
 public class Lot {
@@ -115,22 +116,28 @@ public class Lot {
     }
 
     public void wyswietlMiejsca() {
-        for (var miejsce : this.miejsca) {
-            System.out.println(miejsce);
+        Iterator<Miejsce> iterator = miejsca.iterator();
+        while (iterator.hasNext()) {
+            Miejsce nastepneMiejsce = iterator.next();
+            System.out.println(nastepneMiejsce.toString());
         }
     }
 
     public Miejsce wybierzPierwszeWolneMiejsce() {
-        for (var miejsce : this.miejsca) {
-            if (miejsce.getCzyMiejsceJestZajete() == false) return miejsce;
+        Iterator<Miejsce> iterator = miejsca.iterator();
+        while (iterator.hasNext()) {
+            Miejsce nastepneMiejsce = iterator.next();
+            if(nastepneMiejsce.getCzyMiejsceJestZajete() == false) return nastepneMiejsce;
         }
         return null;
     }
 
     public Miejsce wyszukajMiejsce(int numerMiejsca){
-        for (var miejsce : getMiejsca()) {
-            if (miejsce.getNumerMiejsca() == numerMiejsca) {
-                return miejsce;
+        Iterator<Miejsce> iterator = miejsca.iterator();
+        while (iterator.hasNext()) {
+            Miejsce nastepneMiejsce = iterator.next();
+            if(nastepneMiejsce.getNumerMiejsca() == numerMiejsca && !nastepneMiejsce.getCzyMiejsceJestZajete()) {
+                return nastepneMiejsce;
             }
         }
         return null;
