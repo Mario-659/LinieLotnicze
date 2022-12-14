@@ -120,7 +120,7 @@ public class Lot {
         }
     }
 
-    private Miejsce wybierzPierwszeWolneMiejsce() {
+    public Miejsce wybierzPierwszeWolneMiejsce() {
         for (var miejsce : this.miejsca) {
             if (miejsce.getCzyMiejsceJestZajete() == false) return miejsce;
         }
@@ -128,7 +128,7 @@ public class Lot {
     }
 
     public Miejsce wyszukajMiejsce(int numerMiejsca){
-        for (var miejsce : lot.getMiejsca()) {
+        for (var miejsce : getMiejsca()) {
             if (miejsce.getNumerMiejsca() == numerMiejsca) {
                 return miejsce;
             }

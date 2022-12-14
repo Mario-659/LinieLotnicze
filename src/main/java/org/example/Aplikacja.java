@@ -5,7 +5,7 @@ import org.example.model.*;
 import java.util.Date;
 import java.util.Iterator;
 import java.util.List;
-import Java.util.Scanner;
+import java.util.Scanner;
 
 public class Aplikacja {
     private List<Lot> loty;
@@ -52,7 +52,7 @@ public class Aplikacja {
 
  public boolean stworzRezerwacje(int numerLotu) {
         Lot lot = wyszukajLot(numerLotu);
-        lot.wyswietlMiejsca(lot);
+        lot.wyswietlMiejsca();
         Miejsce miejsceDoZarezerwowania = null;
         if (getCzyMiejsceLosowe()) {
             miejsceDoZarezerwowania = lot.wybierzPierwszeWolneMiejsce();
@@ -89,7 +89,7 @@ public class Aplikacja {
         return true;
     }
 
-    private boolean zweryfikujDanePlatnosci(DanePlatnosci danePlatnosci) {
+    private boolean zweryfikujDanePlatnosci(String[] danePlatnosci) {
         return true;
     }
 

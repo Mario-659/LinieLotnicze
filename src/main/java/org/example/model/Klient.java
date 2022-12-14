@@ -46,6 +46,6 @@ public class Klient {
     }
 
     public String[] getDanePlatnosci(){
-        return {"0123456789", "05/23", "123"};
+        return new String[]{"0123456789", "05/23", "123"};
     }
 }
