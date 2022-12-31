@@ -1,5 +1,7 @@
 package org.example.model;
 
+import java.util.regex.Pattern;
+
 public class Klient {
     private String imie;
     private String nazwisko;
@@ -47,5 +49,83 @@ public class Klient {
 
     public String[] getDanePlatnosci(){
         return new String[]{"0123456789", "05/23", "123"};
+    }
+
+    public void wyswietlDaneKlienta() {
+        String daneKlienta = String.format("Imie: %s, Nazwisko: %s, Pesel %s, Adres poczty: %s",
+                imie, nazwisko, pesel, adresPocztyElektronicznej);
+        System.out.println(daneKlienta);
+    }
+
+    public void podajDaneKlienta(String[] dane){
+        validateDaneKlienta(dane);
+
+        String pesel = dane[0];
+        String nazwisko = dane[1];
+        String imie = dane[2];
+        String email = dane[3];
+
+        this.pesel = pesel;
+        this.nazwisko = nazwisko;
+        this.imie = imie;
+        this.adresPocztyElektronicznej = email;
+    }
+
+    private void validateDaneKlienta(String dane[]) {
+        String pesel = dane[0];
+        validatePesel(pesel);
+
+        String nazwisko = dane[1];
+        validateNazwisko(nazwisko);
+
+        String imie = dane[2];
+        validateImie(imie);
+
+        String email = dane[3];
+        validateEmail(email);
+    }
+
+    private void validatePesel(String pesel) {
+        if (pesel.isBlank() || pesel.length() != 11) {
+            throw new IllegalArgumentException();
+        }
+
+        Pattern onlyNumbers = Pattern.compile("/^[0-9]*$/gm");
+        if (!onlyNumbers.matcher(pesel).matches()) {
+            throw new IllegalArgumentException();
+        }
+    }
+
+    private void validateNazwisko(String nazwisko) {
+        if (nazwisko.isBlank() || nazwisko.length() >= 20) {
+            throw new IllegalArgumentException();
+        }
+
+        Pattern onlyNumbers = Pattern.compile("/^([^0-9]*)$/");
+        if (!onlyNumbers.matcher(nazwisko).matches()) {
+            throw new IllegalArgumentException();
+        }
+    }
+
+    private void validateImie(String imie) {
+        if (imie.isBlank() || imie.length() >= 20) {
+            throw new IllegalArgumentException();
+        }
+
+        Pattern onlyNumbers = Pattern.compile("/^([^0-9]*)$/");
+        if (!onlyNumbers.matcher(imie).matches()) {
+            throw new IllegalArgumentException();
+        }
+    }
+
+    private void validateEmail(String email) {
+        if (email.isBlank()) {
+            throw new IllegalArgumentException();
+        }
+
+        Pattern onlyNumbers = Pattern.compile("^(.+)@(\\\\S+)$");
+        if (!onlyNumbers.matcher(email).matches()) {
+            throw new IllegalArgumentException();
+        }
     }
 }
