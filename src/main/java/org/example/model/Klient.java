@@ -15,6 +15,8 @@ public class Klient {
         this.pesel = pesel;
     }
 
+    public Klient() {}
+
     public String getAdresPocztyElektronicznej() {
         return adresPocztyElektronicznej;
     }
@@ -85,7 +87,7 @@ public class Klient {
         validateEmail(email);
     }
 
-    private void validatePesel(String pesel) {
+    public void validatePesel(String pesel) {
         if (pesel.isBlank() || pesel.length() != 11) {
             throw new IllegalArgumentException();
         }
@@ -96,7 +98,7 @@ public class Klient {
         }
     }
 
-    private void validateNazwisko(String nazwisko) {
+    public void validateNazwisko(String nazwisko) {
         if (nazwisko.isBlank() || nazwisko.length() >= 20) {
             throw new IllegalArgumentException();
         }
@@ -107,7 +109,7 @@ public class Klient {
         }
     }
 
-    private void validateImie(String imie) {
+    public void validateImie(String imie) {
         if (imie.isBlank() || imie.length() >= 20) {
             throw new IllegalArgumentException();
         }
@@ -118,7 +120,7 @@ public class Klient {
         }
     }
 
-    private void validateEmail(String email) {
+    public void validateEmail(String email) {
         if (email.isBlank()) {
             throw new IllegalArgumentException();
         }
