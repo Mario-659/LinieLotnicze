@@ -142,4 +142,8 @@ public class Lot {
         }
         return null;
     }
+
+    public BigDecimal obliczWartoscPromocji(){
+        return this.cenaBazowa * this.promocja.getWartoscProcentowa();
+    }
 }
